@@ -552,20 +552,18 @@ class AxonClient extends EventEmitter {
      *
      * @memberof AxonClient
      */
-    async sendFullHelp(msg, guildConfig) {
-        const prefix = (guildConfig && guildConfig.getPrefixes().length > 0)
-            ? guildConfig.getPrefixes()[0]
-            : this.settings.prefixes[0];
+     async sendFullHelp(msg, guildConfig) {
 
         const embed = {};
 
         embed.author = {
-            name: `Help for ${this.library.client.getUsername()}`,
+            name: `${this.library.client.getUsername()}'s full list of commands`,
             icon_url: this.library.client.getAvatar(),
         };
-        embed.description = this.info.description;
-        embed.footer = {
-            text: 'Runs with AxonCore',
+        embed.description = 'Need more specific help? Follow help with the command you want to know more about!';
+
+        embed.thumbnail = {
+            url: this.library.client.getAvatar()
         };
 
         embed.color = typeof this.template.embeds.help === 'string'
@@ -577,12 +575,11 @@ class AxonClient extends EventEmitter {
         for (const module of this.moduleRegistry.registry.values() ) {
             const commands = module.commands.filter(c => c.permissions.canExecute(msg, guildConfig)[0] );
             if (commands.length > 0) {
-                commandList += `\n**${module.label}**\n${commands.map(c => `• \`${prefix}${c.label}\` → ${c.info.description}`).join('\n ')}\n`;
+                commandList += `\n**${module.label}**\n${commands.map(c => `${c.label}`).join(', ')}\n`;
             }
         }
 
         try {
-            const chan = await this.library.user.getDM(this.library.message.getAuthor(msg) );
 
             /* Split commandList */
             // eslint-disable-next-line no-magic-numbers
@@ -593,8 +590,8 @@ class AxonClient extends EventEmitter {
                     await this.library.channel.sendMessage(chan, { embed } );
                 }
             } else {
-                embed.description = commandList;
-                await this.library.channel.sendMessage(chan, { embed } );
+                embed.description = 'Need more specific help? Follow help with the command you want to know more about!' + '\n' + commandList;
+                await this.library.channel.sendMessage(msg.channel, { embed } );
             }
         } catch (err) {
             this.logger.verbose(err);
