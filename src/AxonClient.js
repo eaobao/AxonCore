@@ -30,7 +30,6 @@ import LibrarySelector from './Libraries/index';
 import LoggerSelector from './Loggers/index';
 
 // Misc
-import logo from './Configs/logo';
 import packageJSON from '../package.json';
 import { EMBED_LIMITS } from './Utility/Constants/DiscordEnums';
 import { WEBHOOK_TYPES, LOG_LEVELS, WEBHOOK_TO_COLOR, DEBUG_FLAGS } from './Utility/Constants/AxonEnums';
@@ -113,7 +112,6 @@ class AxonClient extends EventEmitter {
      */
     constructor(botClient, axonOptions = {}, modules = {} ) {
         super();
-        axonOptions.logo ? axonOptions.logo(packageJSON.version) : logo(packageJSON.version);
 
         this._configs = {
             webhooks: axonOptions.webhooks,
