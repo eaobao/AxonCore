@@ -1,1 +1,3 @@
-console.log('A very fancy logo')
+export default (v) => {
+  console.log('A very fancy logo')
+}
