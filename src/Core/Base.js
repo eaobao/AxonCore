@@ -257,9 +257,9 @@ class Base {
             description: `${this.template.emotes.success} ${content}`
         }
         if (typeof content === 'string') {
-            await this.sendMessage(channel, embed, options);
+            await this.sendMessage(channel, {embed}, options);
         } else {
-            await this.sendMessage(channel, embed, options);
+            await this.sendMessage(channel, {embed}, options);
         }
         return new CommandResponse( { success: true, triggerCooldown } );
     }
@@ -283,13 +283,13 @@ class Base {
     async sendError(channel, content, options = {} ) {
         const triggerCooldown = !!options.triggerCooldown;
         let embed = {
-            color: 4437377,
+            color: 15747399,
             description: `${this.template.emotes.error} ${content}`
         }
         if (typeof content === 'string') {
-            await this.sendMessage(channel, embed, options);
+            await this.sendMessage(channel, {embed}, options);
         } else {
-            await this.sendMessage(channel, embed, options);
+            await this.sendMessage(channel, {embed}, options);
         }
         return new CommandResponse( { success: false, triggerCooldown, error: options.error } );
     }
