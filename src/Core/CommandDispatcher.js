@@ -81,6 +81,11 @@ class CommandDispatcher {
                 return;
             }
 
+            /* Ignore all commands if bot is in maintenance mode */
+            if (!this._axon.axonUtils.isBotOwner(this.library.user.getID(author)) && this._axon.settings.debugMode === true) {
+                return;
+            }
+            
             /*
              * Get guild Conf from cache or DB
              * Raise error eventually
