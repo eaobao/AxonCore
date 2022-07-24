@@ -519,11 +519,19 @@ class AxonClient extends EventEmitter {
         } );
 
         this.botClient.on('error', (err) => {
-            this.log('ERROR', err);
+            if (err.message.includes('Unknown guild text channel type')) {
+                return;
+            } else {
+                this.log('ERROR', err);
+            }
         } );
 
         this.botClient.on('warn', (msg) => {
-            this.log('ERROR', msg);
+            if (msg.toString().includes('Unknown guild text channel type')) {
+                return;
+            } else {
+                this.log('ERROR', msg);
+            }
         } );
 
         this.log('INFO', 'Error listeners bound!');
