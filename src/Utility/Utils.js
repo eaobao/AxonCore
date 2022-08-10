@@ -157,14 +157,51 @@ class Utils {
      * Split the given content (String), according to correct linebreaks.
      * Split at default 1900 characters.
      *
-     * @param {String} content
-     * @param {Number} [length]
-     * @returns {Array<String>} The array of content string splitted
+     * @param {String} message
+     * @param {Number} len
+     * @returns {String[]} The array of content string splitted
      * @memberof Utils
      */
-    splitMessage(content, length) {
-        return content.match(typeof length === 'number' && length > 0 ? new RegExp(`[\\s\\S]{1,${length}}([\\n\\r]|$)`, 'g') : this.stringSplit);
-    }
+    splitMessage(message, len) {
+		const msgArray = [];
+
+		if (!message) {
+			return [];
+		}
+
+		if (Array.isArray(message)) {
+			message = message.join('\n');
+		}
+
+		if (message.length > len) {
+			let str = '';
+			let pos;
+			while (message.length > 0) {
+				let index = message.lastIndexOf('\n', len);
+				if (index === -1) {
+					index = message.lastIndexOf(' ', len);
+				}
+
+				pos = (message.length >= len && index !== 0) ? index : message.length;
+
+				// if there's no newlines
+				if (pos > len) {
+					pos = len;
+				}
+
+				// grab the substring, and remove from message
+				str = message.substr(0, pos);
+				message = message.substr(pos);
+
+				// push to array
+				msgArray.push(str);
+			}
+		} else {
+			msgArray.push(message);
+		}
+
+		return msgArray;
+	}
 
     /**
      * Returns the guild prefix of the given msg.
