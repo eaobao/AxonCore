@@ -1,6 +1,6 @@
 {
   "name": "axoncore",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "The best fully featured discord bot framework. Universal Client, Command and Event handler.",
   "author": "Khaaz <khaaz.dev@gmail.com>",
   "link": "https://github.com/Khaaz/AxonCore",
