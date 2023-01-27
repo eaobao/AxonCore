@@ -35,6 +35,8 @@ export { default as messageUpdate } from './MessageUpdateHandler';
 
 export { default as presenceUpdate } from './PresenceUpdateHandler';
 
+export { default as ready } from './ReadyHandler';
+
 export { default as shardDisconnect } from './ShardDisconnectHandler';
 export { default as shardPreReady } from './ShardPreReadyHandler';
 export { default as shardReady } from './ShardReadyHandler';
@@ -42,6 +44,7 @@ export { default as shardResume } from './ShardResumeHandler';
 
 export { default as threadCreate } from './ThreadCreateHandler';
 export { default as threadDelete } from './ThreadDeleteHandler';
+export { default as threadUpdate } from './ThreadUpdateHandler';
 
 export { default as typingStart } from './TypingStartHandler';
 
