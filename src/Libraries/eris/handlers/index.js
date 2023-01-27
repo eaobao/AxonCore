@@ -40,6 +40,9 @@ export { default as shardPreReady } from './ShardPreReadyHandler';
 export { default as shardReady } from './ShardReadyHandler';
 export { default as shardResume } from './ShardResumeHandler';
 
+export { default as threadCreate } from './ThreadCreateHandler;
+export { default as threadDelete } from './ThreadDeleteHandler;
+
 export { default as typingStart } from './TypingStartHandler';
 
 export { default as unavailableGuildCreate } from './UnavailableGuildCreateHandler';
